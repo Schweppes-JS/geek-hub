@@ -4,15 +4,9 @@ function waterCounting (array) {
   let isWater = false;
   let counter = 0;
   // finding the highest hill
-  const maxHill = Math.max(...array);
-  const indexMax = array.indexOf(maxHill);
-  // divide the array into two parts relative to the highest hill
-  const leftHalf = array.slice(0, indexMax+ 1);
-  const rightHalf = array.slice(indexMax, array.length);
-  //expand the array as the algorithm only works from left to right
-  rightHalf.reverse();
+  const indexMax = array.indexOf(Math.max(...array));
   // water search algorithm
-  const reducer = (accumulator, currentValue, index, currentArray) => {
+  function reducer (accumulator, currentValue, index, currentArray) {
     // checking if it slope
     if (currentValue > currentArray[index + 1]) {
       // checking if after the slope is there a higher or flat hill
@@ -76,12 +70,14 @@ function waterCounting (array) {
       return accumulator;
     }
   };
-  counter += leftHalf.reduce(reducer, 0);
+  // divide the array into two parts relative to the highest hill
+  counter += array.slice(0, indexMax + 1).reduce(reducer, 0);
   // set the default values ​​for counting water in the other part
   startWater = null;
   endWater = null;
   isWater = false;
-  counter += rightHalf.reduce(reducer, 0);
+  //expand the array as the algorithm only works from left to right
+  counter += array.slice(indexMax, array.length).reverse().reduce(reducer, 0);
   return counter;
 }
 

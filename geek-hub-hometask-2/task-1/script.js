@@ -9,10 +9,14 @@ function minimum (array) {
         } else {
           array[i] < min ? min = array[i] : false;
         }
-      } else continue;
+      } else {
+        continue;
+      }
     }
     return min;
-  } else return min;
+  } else {
+    return min;
+  }
 }
 
 // finding maximum number of array
@@ -26,10 +30,14 @@ function maximum (array) {
         } else {
           array[i] > max ? max = array[i] : false;
         }
-      } else continue;
+      } else {
+        continue;
+      }
     }
     return max;
-  } else return max;
+  } else {
+    return max;
+  }
 }
 
 // finding sum numbers of array
@@ -43,19 +51,22 @@ function adding (array) {
         } else {
           sum += array[i];
         }
-      } else continue;
+      } else {
+        continue;
+      }
     }
     return sum;
-  } else return sum;
+  } else {
+    return sum;
+  }
 }
 
 const minMaxSum = (array) => {
   if (array) {
-    let min = minimum(array);
-    let max = maximum(array);
-    let sum = adding(array);
-    return `min = ${min}, max = ${max}, sum = ${sum}`;
-  } else return null;
+    return `min = ${minimum(array)}, max = ${maximum(array)}, sum = ${adding(array)}`;
+  } else {
+    return null;
+  }
 }
 
 console.log(minMaxSum([3,0,-5,1,44,-12,3,0,0,1,2,-3,-3,2,1,4,-2-3-1]));
