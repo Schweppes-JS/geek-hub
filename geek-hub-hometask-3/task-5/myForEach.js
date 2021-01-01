@@ -1,15 +1,12 @@
 // myForEach
 Array.prototype.myForEach = function (callBack, context, index = 0) {
   if (index < this.length) {
-    if (context) {
-      callBack(context[index], index, context);
+    function cycle (array) {
+      callBack(array[index], index, array);
       index++;
-      this.myForEach(callBack, context, index);
-    } else {
-      callBack(this[index], index, this);
-      index++;
-      this.myForEach(callBack ,context , index);
+      array.myForEach(callBack, array, index);
     }
+    context ? cycle(context) : cycle(this);
   }
   return;
 }

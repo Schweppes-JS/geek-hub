@@ -2,20 +2,12 @@
 Array.prototype.myFilter = function (callBack, context, index = 0, newArray = []) {
     if (index < this.length) {
       if (context) {
-        const result = Boolean(callBack(context[index], index, context));
-        if (result) {
-            newArray.push(context[index]);
-        }
-        index++;
-        this.myFilter(callBack ,context , index, newArray);
+        Boolean(callBack(context[index], index, context)) ? newArray.push(context[index]) : false;
       } else {
-        const result = Boolean(callBack(this[index], index, this));
-        if (result) {
-            newArray.push(this[index]);
-        }
-        index++;
-        this.myFilter(callBack ,context , index, newArray);
+        Boolean(callBack(this[index], index, this)) ? newArray.push(this[index]) : false;
       }
+      index++;
+      this.myFilter(callBack ,context , index, newArray);
     }
     return newArray;
 }

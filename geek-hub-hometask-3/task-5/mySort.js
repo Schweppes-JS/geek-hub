@@ -1,62 +1,66 @@
 // mySort
 Array.prototype.mySort = function (compare) {
 
-  const currentArray = this;
-  const arrayOfUndefined = [];
-  let newArray = [];
-  let utfArray = [];
-  let utfSumArray = [];
-  let elementToString = '';
-  let utfSumString = '';
+  const strings = {
+    elementToString: '',
+    utfSumString: ''
+  }
+  const arrays = {
+    currentArray: this,
+    arrayOfUndefined: [],
+    newArray: [],
+    utfArray: [],
+    utfSumArray: []
+  }
 
   // Creating array with UTF value each element of main Array
   function convertingToUTF (string) {
     if (compare === 'compare') {
       for (let j = 0; j < string.length; j++) {
-        utfSumString += string[j].charCodeAt().toString();
+        strings.utfSumString += string[j].charCodeAt().toString();
       }
-      if (utfSumString === '') {
-        utfArray.push(0)
+      if (strings.utfSumString === '') {
+        arrays.utfArray.push(0)
       } else {
-        utfArray.push(parseInt(utfSumString));
+        arrays.utfArray.push(parseInt(strings.utfSumString));
       }
-      elementToString = '';
-      utfSumString = '';
+      strings.elementToString = '';
+      strings.utfSumString = '';
     }
     else {
       for (let j = 0; j < string.length; j++) {
-        utfSumArray.push(string[j].charCodeAt());
+        arrays.utfSumArray.push(string[j].charCodeAt());
       }
-      if (utfSumArray === []) {
-        utfArray.push(0)
+      if (arrays.utfSumArray === []) {
+        arrays.utfArray.push(0)
       } else {
-        utfArray.push(utfSumArray);
+        arrays.utfArray.push(arrays.utfSumArray);
       }
-      elementToString = '';
-      utfSumArray = [];
+      strings.elementToString = '';
+      arrays.utfSumArray = [];
     }
   }
 
   // Converting each elements to string
   function convertingToString () {
-    for (let i = 0; i < currentArray.length; i++) {
+    for (let i = 0; i < arrays.currentArray.length; i++) {
       // if main Array has undefined put this element in another array
-      if (currentArray[i] === undefined) {
-        arrayOfUndefined.push(currentArray[i]);
+      if (arrays.currentArray[i] === undefined) {
+        arrays.arrayOfUndefined.push(arrays.currentArray[i]);
         // push and delete element for creating empty slot and safe index of "undifined"
-        utfArray.push(currentArray[i]);
-        delete utfArray[i];
+        arrays.utfArray.push(arrays.currentArray[i]);
+        delete arrays.utfArray[i];
         continue;
       }
       // if main Array has null convert this element to string
-      else if (currentArray[i] === null) {
-        elementToString = 'null';
+      else if (arrays.currentArray[i] === null) {
+        strings.elementToString = 'null';
       } 
       // In another situation
       else {
-        elementToString = currentArray[i].toString();
+        strings.elementToString = arrays.currentArray[i].toString();
       }
-      convertingToUTF(elementToString);
+      convertingToUTF(strings.elementToString);
     }
   };
 
@@ -104,15 +108,15 @@ Array.prototype.mySort = function (compare) {
   // finding element that has least UTF and push him in new array
   function pushingMinUTF (end, start = 0) {
     if (start < end) {
-      const min = searchingMin(utfArray);
-      for (let i = 0; i < currentArray.length; i++) {
-        if (min === utfArray[i]) {
-          newArray.push(currentArray[i]);
+      const min = searchingMin(arrays.utfArray);
+      for (let i = 0; i < arrays.currentArray.length; i++) {
+        if (min === arrays.utfArray[i]) {
+          arrays.newArray.push(arrays.currentArray[i]);
         }
       }
-      for (let i = 0; i < utfArray.length; i++) {
-        if (utfArray[i] == min) {
-          delete utfArray[i];
+      for (let i = 0; i < arrays.utfArray.length; i++) {
+        if (arrays.utfArray[i] == min) {
+          delete arrays.utfArray[i];
         }
       }
       start++;
@@ -125,15 +129,15 @@ Array.prototype.mySort = function (compare) {
   // finding element that has least UTF and push him in new array
   function pushingMinUTF (end, start = 0) {
     if (start < end) {
-      const min = searchingMin(utfArray);
-      for (let i = 0; i < currentArray.length; i++) {
-        if (min === utfArray[i]) {
-          newArray.push(currentArray[i]);
+      const min = searchingMin(arrays.utfArray);
+      for (let i = 0; i < arrays.currentArray.length; i++) {
+        if (min === arrays.utfArray[i]) {
+          arrays.newArray.push(arrays.currentArray[i]);
         }
       }
-      for (let i = 0; i < utfArray.length; i++) {
-        if (utfArray[i] == min) {
-          delete utfArray[i];
+      for (let i = 0; i < arrays.utfArray.length; i++) {
+        if (arrays.utfArray[i] == min) {
+          delete arrays.utfArray[i];
         }
       }
       start++;
@@ -147,13 +151,13 @@ Array.prototype.mySort = function (compare) {
   if (compare === 'compare') {
     convertingToString();
     // We need to know how many time we must perform sorting without regard to "undefined"
-    const amountOfIterators = utfArray.length - arrayOfUndefined.length;
+    const amountOfIterators = arrays.utfArray.length - arrays.arrayOfUndefined.length;
     pushingMinUTF(amountOfIterators);
     // concatenate filtered array with undefined elements
-    newArray = newArray.concat(arrayOfUndefined);
+    arrays.newArray = arrays.newArray.concat(arrays.arrayOfUndefined);
     // changing passed array
     for (let i = 0; i < this.length; i++) {
-      this[i] = newArray[i];
+      this[i] = arrays.newArray[i];
     }
     return this;
   }
@@ -161,14 +165,14 @@ Array.prototype.mySort = function (compare) {
   else {
     convertingToString();
     // We need to know how many time we must perform sorting without regard to "undefined"
-    const amountOfIterators = utfArray.length - arrayOfUndefined.length;
+    const amountOfIterators = arrays.utfArray.length - arrays.arrayOfUndefined.length;
     // finding element that has least UTF and push him in new array
     pushingMinUTF(amountOfIterators);
     // concatenate filtered array with undefined elements
-    newArray = newArray.concat(arrayOfUndefined);
+    arrays.newArray = arrays.newArray.concat(arrays.arrayOfUndefined);
     // changing passed array
     for (let i = 0; i < this.length; i++) {
-      this[i] = newArray[i];
+      this[i] = arrays.newArray[i];
     }
     return this;
   }

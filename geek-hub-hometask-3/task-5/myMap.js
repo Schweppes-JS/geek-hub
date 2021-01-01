@@ -1,16 +1,16 @@
 // myMap
 Array.prototype.myMap = function (callBack, context, index = 0, newArray = []) {
   if (index < this.length) {
+    function cycle (array) {
+      const result = callBack(array[index], index, array);
+      newArray.push(result);
+      index++;
+      array.myMap(callBack, array, index, newArray);
+    }
     if (context) {
-      const result = callBack(context[index], index, context);
-      newArray.push(result);
-      index++;
-      this.myMap(callBack ,context , index, newArray);
+      cycle(context);
     } else {
-      const result = callBack(this[index], index, this);
-      newArray.push(result);
-      index++;
-      this.myMap(callBack ,context , index, newArray);
+      cycle(this);
     }
   }
   return newArray;
