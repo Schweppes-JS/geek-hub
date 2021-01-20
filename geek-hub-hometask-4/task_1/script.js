@@ -34,9 +34,9 @@ function fastSlide(event) {
         event.target.classList.add('selected');
         indexDifference = Math.abs(i - currentPhotoIndex);
         if (i > currentPhotoIndex) {
-          slideRight(event ,indexDifference);
+          slideRight(event, indexDifference);
         } else if (i < currentPhotoIndex) {
-          slideLeft(event ,indexDifference);
+          slideLeft(event, indexDifference);
         }
         currentPhotoIndex = i;
       }
@@ -83,6 +83,10 @@ async function getPhotos() {
 
 getPhotos();
 
+function sliding(event, step = 1, direction) {
+
+}
+
 function slideLeft(event, step = 1) {
   if (canClick) {
     canClick = false;
@@ -95,7 +99,7 @@ function slideLeft(event, step = 1) {
             photoIndexArray[photoIndexArray.length - 1].classList.add('selected');
             currentPhotoIndex = photoIndexArray.length - 1;
           } else {
-            photoIndexArray[i-1].classList.add('selected');
+            photoIndexArray[i - 1].classList.add('selected');
             currentPhotoIndex--;
           }
           break;
@@ -123,7 +127,7 @@ function slideRight(event, step = 1) {
             photoIndexArray[0].classList.add('selected');
             currentPhotoIndex = 0;
           } else {
-            photoIndexArray[i+1].classList.add('selected');
+            photoIndexArray[i + 1].classList.add('selected');
             currentPhotoIndex++;
           }
           break;
