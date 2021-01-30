@@ -1,0 +1,41 @@
+.app-container__time-zone-container {
+  position: absolute;
+  display: flex;
+  bottom: 20px;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  box-shadow: var(--shadow);
+}
+
+.time-zone-container__heading {
+  line-height: 23px;
+  margin: 0 10px;
+  color: var(--complementary-colors);
+}
+
+.time-zone-container__time-zone {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
+  padding: 0 5px;
+  outline: none;
+}
+
+.time-zone-container__time-zone::-webkit-scrollbar {
+  width: 5px;
+}
+
+.time-zone-container__time-zone::-webkit-scrollbar-track {
+  background-color: var(--border-color);
+}
+
+.time-zone-container__time-zone::-webkit-scrollbar-thumb {
+  background: var(--secondary-color);
+  border-radius: 10px;
+}
+
+.time-zone-container__time-zone::-webkit-scrollbar-thumb:hover {
+  background: var(--arrow-color);
+  cursor: pointer;
+}

@@ -1,0 +1,58 @@
+.app-container__theme-switch {
+  position: absolute;
+  top: 20px;
+  display: flex;
+  align-items: center;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  box-shadow: var(--shadow);
+}
+
+.theme-switch__heading {
+  margin: 0 10px;
+  font-size: 1.1rem;
+  color: var(--complementary-colors);
+}
+
+.theme-switch__toggler {
+  display: flex;
+  align-items: center;
+  padding: 3px 10px 3px 0;
+  position: relative;
+}
+
+.toggler__icon {
+  font-size: 1.7rem;
+  color: var(--secondary-color);
+  margin-right: 10px;
+}
+
+.toggler__slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 34px;
+  width: 60px;
+  border-radius: 34px;
+  background-color: var(--complementary-colors);
+}
+
+.toggler__slider:before {
+  position: absolute;
+  content: "";
+  height: 24px;
+  width: 24px;
+  left: 5px;
+  background-color: var(--border-color);
+  border-radius: 50%;
+  transition: all .4s;
+}
+
+.toggler__checkbox {
+  position: absolute;
+  opacity: 0;
+}
+
+.toggler__checkbox:checked + .toggler__slider:before {
+  transform: translateX(26px);
+}
