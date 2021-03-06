@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import './ThemeSwitch.css';
 
@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun } from "@fortawesome/free-solid-svg-icons";
 import { faMoon } from "@fortawesome/free-solid-svg-icons";
 
-export class ThemeSwitch extends Component {
+export class ThemeSwitch extends PureComponent {
 
   state = {
     darkTheme: false
