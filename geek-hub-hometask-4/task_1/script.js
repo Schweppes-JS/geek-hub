@@ -83,10 +83,6 @@ async function getPhotos() {
 
 getPhotos();
 
-function sliding(event, step = 1, direction) {
-
-}
-
 function slideLeft(event, step = 1) {
   if (canClick) {
     canClick = false;
